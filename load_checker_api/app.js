@@ -9,13 +9,13 @@ app.use(express.json());
 
 let loads = [];
 
-// ✅ Load CSV at Startup
+// Load CSV
 fs.createReadStream('loads.csv')
   .pipe(csv())
   .on('data', (row) => loads.push(row))
   .on('end', () => console.log('CSV loaded successfully'));
 
-// ✅ POST /loads - Retrieve load details via JSON request
+// POST /loads - Retrieve load details via JSON request
 app.post('/loads', (req, res) => {
     const { reference_number } = req.body;
 
@@ -32,5 +32,5 @@ app.post('/loads', (req, res) => {
     res.json(load);
 });
 
-// ✅ Ensure API listens on the correct port
+// Ensure API listens on the correct port
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
